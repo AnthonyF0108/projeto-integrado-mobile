@@ -1,7 +1,7 @@
-🌱 AgroVal – Sistema de Vendas Digital
+🌱 AgroVale – Sistema de Vendas Digital
 📌 Sobre o Projeto
 
-O AgroVal é um aplicativo mobile desenvolvido para auxiliar no registro e controle de vendas de produtos agrícolas.
+O AgroVale é um aplicativo mobile desenvolvido para auxiliar no registro e controle de vendas de produtos agrícolas.
 
 O projeto foi desenvolvido como atividade acadêmica do curso de Análise e Desenvolvimento de Sistemas (ADS) utilizando Flutter no Android Studio.
 
@@ -15,7 +15,7 @@ Registrar vendas
 
 Visualizar produtos
 
-Auxiliar no controle de vendas da AgroVal
+Auxiliar no controle de vendas da AgroVale
 
 Simular um sistema básico de gestão comercial
 
@@ -32,7 +32,7 @@ Git
 GitHub
 
 📂 Estrutura do Projeto
-agroval/
+agrovale/
 │
 ├── android/          # Configurações do Android
 ├── ios/              # Configurações do iOS
@@ -47,6 +47,7 @@ agroval/
 ├── LICENSE
 ├── README.md
 ├── analysis_options.yaml
+
 📱 Funcionalidades
 
 O aplicativo possui funcionalidades simples como:
@@ -59,25 +60,6 @@ Visualização de produtos
 
 Interface simples e intuitiva
 
-🚀 Como Executar o Projeto
-
-1️⃣ Instalar o Flutter
-2️⃣ Instalar o Android Studio
-3️⃣ Clonar o repositório
-
-git clone https://github.com/seu-usuario/agroval.git
-
-4️⃣ Entrar na pasta do projeto
-
-cd agroval
-
-5️⃣ Instalar dependências
-
-flutter pub get
-
-6️⃣ Executar o aplicativo
-
-flutter run
 👨‍💻 Autor
 
 Projeto desenvolvido para fins acadêmicos.
