@@ -1,21 +1,86 @@
-<<<<<<< HEAD
-# projetointegrado
+🌱 AgroVal – Sistema de Vendas Digital
+📌 Sobre o Projeto
 
-A new Flutter project.
+O AgroVal é um aplicativo mobile desenvolvido para auxiliar no registro e controle de vendas de produtos agrícolas.
 
-## Getting Started
+O projeto foi desenvolvido como atividade acadêmica do curso de Análise e Desenvolvimento de Sistemas (ADS) utilizando Flutter no Android Studio.
 
-This project is a starting point for a Flutter application.
+O objetivo é criar uma solução simples para digitalizar o processo de vendas, permitindo registrar produtos e vendas de forma rápida e organizada.
 
-A few resources to get you started if this is your first Flutter project:
+🎯 Objetivo
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+Desenvolver um aplicativo mobile simples que permita:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
-=======
-# projeto-integrado-mobile
->>>>>>> 1b9cba58feff3e1e47366256190d151025d53f5d
+Registrar vendas
+
+Visualizar produtos
+
+Auxiliar no controle de vendas da AgroVal
+
+Simular um sistema básico de gestão comercial
+
+🛠 Tecnologias Utilizadas
+
+Flutter
+
+Dart
+
+Android Studio
+
+Git
+
+GitHub
+
+📂 Estrutura do Projeto
+agroval/
+│
+├── android/          # Configurações do Android
+├── ios/              # Configurações do iOS
+├── web/              # Versão Web
+├── windows/          # Versão Windows
+├── assets/images/    # Imagens do aplicativo
+├── docs/             # Documentação do projeto
+├── lib/              # Código principal do aplicativo
+├── test/             # Testes do projeto
+│
+├── .gitignore
+├── LICENSE
+├── README.md
+├── analysis_options.yaml
+📱 Funcionalidades
+
+O aplicativo possui funcionalidades simples como:
+
+Cadastro de produtos
+
+Registro de vendas
+
+Visualização de produtos
+
+Interface simples e intuitiva
+
+🚀 Como Executar o Projeto
+
+1️⃣ Instalar o Flutter
+2️⃣ Instalar o Android Studio
+3️⃣ Clonar o repositório
+
+git clone https://github.com/seu-usuario/agroval.git
+
+4️⃣ Entrar na pasta do projeto
+
+cd agroval
+
+5️⃣ Instalar dependências
+
+flutter pub get
+
+6️⃣ Executar o aplicativo
+
+flutter run
+👨‍💻 Autor
+
+Projeto desenvolvido para fins acadêmicos.
+
+Aluno: Anthony Ferreira
+Curso: Análise e Desenvolvimento de Sistemas
