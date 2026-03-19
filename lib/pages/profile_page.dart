@@ -1,31 +1,36 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
-class ProfilePage extends StatelessWidget {
+class AccountPage extends StatelessWidget {
+  const AccountPage({super.key});
 
   @override
   Widget build(BuildContext context) {
 
-    final user = FirebaseAuth.instance.currentUser;
-
     return Scaffold(
-      appBar: AppBar(title: const Text("Minha Conta")),
+
+      appBar: AppBar(
+        title: const Text("Minha Conta"),
+      ),
 
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: [
 
-            Text("Email: ${user?.email}"),
+          children: const [
 
-            const SizedBox(height: 20),
+            CircleAvatar(
+              radius: 50,
+              child: Icon(Icons.person, size: 50),
+            ),
 
-            ElevatedButton(
-              onPressed: () {
-                FirebaseAuth.instance.signOut();
-              },
-              child: const Text("Sair"),
-            )
+            SizedBox(height: 20),
+
+            Text(
+              "Anthony Ferreira",
+              style: TextStyle(fontSize: 22),
+            ),
+
+            Text("anthony@email.com")
 
           ],
         ),
