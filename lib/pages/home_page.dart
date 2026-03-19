@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/product_card.dart';
 import 'search_page.dart';
-import 'account_page.dart';
+import 'profile_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -17,7 +17,7 @@ class _HomePageState extends State<HomePage> {
   final List<Widget> pages = const [
     HomeContent(),
     SearchPage(),
-    AccountPage(),
+    ProfilePage(),
   ];
 
   @override

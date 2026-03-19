@@ -7,7 +7,7 @@ import 'pages/login_page.dart'; // Adicione esta linha junto com as outras
 import 'pages/home_page.dart';
 import 'pages/search_page.dart';
 import 'pages/orders_page.dart';
-import 'pages/account_page.dart';
+import 'pages/profile_page.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -61,7 +61,7 @@ class _MainNavigationState extends State<MainNavigation> {
     HomePage(),
     SearchPage(),
     OrdersPage(),
-    AccountPage(),
+    ProfilePage(),
   ];
 
   @override
