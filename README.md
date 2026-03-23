@@ -20,6 +20,21 @@ Auxiliar no controle de vendas da AgroVale
 
 Simular um sistema básico de gestão comercial
 
+## Escopo do Sistema
+
+O sistema AgroVale é um aplicativo mobile desenvolvido para auxiliar no controle de vendas de produtos agrícolas.
+
+O sistema permitirá:
+
+- cadastrar produtos
+- visualizar produtos cadastrados
+- registrar vendas
+- atualizar automaticamente o estoque
+- visualizar histórico de vendas
+
+O objetivo é facilitar o controle de vendas de forma simples e organizada.
+
+
 🛠 Tecnologias Utilizadas
 
 Flutter
