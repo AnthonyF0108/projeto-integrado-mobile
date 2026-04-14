@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import '../services/auth_service.dart'; // Ajuste o caminho se a sua pasta for diferente
-import '../main.dart'; // Para podermos navegar para a MainNavigation depois do login
-import 'register_page.dart'; // Para navegar para a tela de registro
+import '../services/auth_service.dart';
+import '../main.dart';
+import 'register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -11,180 +11,196 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  // Controladores para capturar o que o usuário digita
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-
-  // Variável para mostrar a bolinha de carregando
   bool _isLoading = false;
 
-  // Função que chama o nosso AuthService
   void _fazerLogin() async {
-    setState(() {
-      _isLoading = true; // Liga o carregamento
-    });
+    setState(() => _isLoading = true);
+    final user = await AuthService().loginComEmailSenha(
+        _emailController.text.trim(),
+        _passwordController.text.trim()
+    );
+    setState(() => _isLoading = false);
 
-    final String email = _emailController.text.trim();
-    final String password = _passwordController.text.trim();
-
-    // Chama a função que criamos lá no auth_service.dart
-    final user = await AuthService().loginComEmailSenha(email, password);
-
-    setState(() {
-      _isLoading = false; // Desliga o carregamento
-    });
-
-    if (user != null) {
-      // Deu certo! Vai para a tela principal e não deixa o usuário voltar pra tela de login pelo botão de voltar do celular
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MainNavigation()),
-        );
-      }
-    } else {
-      // Deu erro! Mostra um aviso na parte de baixo da tela
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(
-            content: Text('Erro ao entrar. Verifique seu e-mail e senha.'),
-            backgroundColor: Colors.redAccent,
-          ),
-        );
-      }
+    if (user != null && mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainNavigation()),
+      );
+    } else if (mounted) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Erro ao entrar. Verifique seus dados.'), backgroundColor: Colors.redAccent),
+      );
     }
   }
 
-  // Função para o Login com Google
   void _loginComGoogle() async {
     setState(() => _isLoading = true);
-
-    // Aqui você chama a função que deve estar no seu AuthService
     final user = await AuthService().loginComGoogle();
-
     setState(() => _isLoading = false);
-
-    if (user != null) {
-      if (mounted) {
-        Navigator.pushReplacement(
-          context,
-          MaterialPageRoute(builder: (context) => const MainNavigation()),
-        );
-      }
-    } else {
-      if (mounted) {
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Login com Google cancelado ou falhou.')),
-        );
-      }
+    if (user != null && mounted) {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => const MainNavigation()),
+      );
     }
   }
 
   @override
   void dispose() {
-    // É boa prática limpar os controladores quando a tela é fechada
     _emailController.dispose();
     _passwordController.dispose();
     super.dispose();
   }
 
+  // Widget auxiliar para os campos de texto estilo "Glass"
+  Widget _buildTextField({
+    required TextEditingController controller,
+    required String hint,
+    required IconData icon,
+    bool obscure = false,
+  }) {
+    return Container(
+      decoration: BoxDecoration(
+        color: Colors.black.withOpacity(0.3),
+        borderRadius: BorderRadius.circular(30),
+        border: Border.all(color: Colors.white12),
+      ),
+      child: TextField(
+        controller: controller,
+        obscureText: obscure,
+        style: const TextStyle(color: Colors.white),
+        decoration: InputDecoration(
+          hintText: hint,
+          hintStyle: const TextStyle(color: Colors.white70),
+          prefixIcon: Icon(icon, color: Colors.white70),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.symmetric(vertical: 15),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.all(24.0),
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              // Um ícone para dar um charme (depois você pode trocar pela sua logo)
-              const Icon(
-                Icons.agriculture,
-                size: 100,
-                color: Colors.green,
+      body: Stack(
+        children: [
+          // Fundo com Degradê Radial (AgroVale Style)
+          Container(
+            decoration: const BoxDecoration(
+              gradient: RadialGradient(
+                center: Alignment.center,
+                radius: 1.2,
+                colors: [Color(0xFF1B4D3E), Color(0xFF0A2417)],
               ),
-              const SizedBox(height: 32),
-
-              const Text(
-                "Bem-vindo ao AgroVale!",
-                textAlign: TextAlign.center,
-                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
-              ),
-              const SizedBox(height: 32),
-
-              // Campo de E-mail
-              TextField(
-                controller: _emailController,
-                keyboardType: TextInputType.emailAddress,
-                decoration: const InputDecoration(
-                  labelText: "E-mail",
-                  prefixIcon: Icon(Icons.email),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              // Campo de Senha
-              TextField(
-                controller: _passwordController,
-                obscureText: true, // Esconde a senha com bolinhas
-                decoration: const InputDecoration(
-                  labelText: "Senha",
-                  prefixIcon: Icon(Icons.lock),
-                  border: OutlineInputBorder(),
-                ),
-              ),
-              const SizedBox(height: 24),
-
-              // Botão de Login
-              SizedBox(
-                height: 50,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.green,
-                    foregroundColor: Colors.white,
-                  ),
-                  onPressed: _isLoading ? null : _fazerLogin,
-                  // Se estiver carregando, mostra a bolinha, senão mostra o texto
-                  child: _isLoading
-                      ? const CircularProgressIndicator(color: Colors.white)
-                      : const Text("ENTRAR", style: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
-                ),
-              ),
-              const SizedBox(height: 16),
-
-              const SizedBox(height: 16),
-
-              SizedBox(
-                height: 50,
-                child: OutlinedButton.icon(
-                  style: OutlinedButton.styleFrom(
-                    side: const BorderSide(color: Colors.green), // Borda verde
-                    foregroundColor: Colors.green,
-                  ),
-                  icon: const Icon(Icons.account_circle), // Ou uma imagem do logo do google
-                  label: const Text("CONTINUAR COM GOOGLE"),
-                  onPressed: _isLoading ? null : _loginComGoogle,
-                ),
-              ),
-
-              TextButton(
-                onPressed: () {
-                  // Adicione esta navegação aqui:
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => const RegisterPage()),
-                  );
-                },
-                child: const Text(
-                  "Ainda não tem conta? Cadastre-se",
-                  style: TextStyle(color: Colors.green),
-                ),
-              )
-            ],
+            ),
           ),
-        ),
+          SafeArea(
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 30),
+                child: Column(
+                  children: [
+                    // LOGO (Aqui você pode colocar um Image.asset da sua logo)
+                    Image.asset(
+                      'assets/images/logo_agrovale.png', // <-- CERTIFIQUE-SE DE QUE O NOME DO ARQUIVO ESTÁ CORRETO AQUI
+                      height: 120, // Ajuste a altura se necessário para ficar bom no layout
+                      fit: BoxFit.contain, // Garante que a imagem não seja cortada
+                    ),
+                    const SizedBox(height: 20),
+                    const Text("Criar Conta", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
+                    const Text("Cadastre-se para comprar com a gente.", style: TextStyle(color: Colors.white70)),
+                    const SizedBox(height: 40),
+
+                    // Container Centralizado (Card de Login)
+                    Container(
+                      padding: const EdgeInsets.all(20),
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.05),
+                        borderRadius: BorderRadius.circular(40),
+                        border: Border.all(color: Colors.white10),
+                      ),
+                      child: Column(
+                        children: [
+                          _buildTextField(controller: _emailController, hint: "E-mail", icon: Icons.person),
+                          const SizedBox(height: 15),
+                          _buildTextField(controller: _passwordController, hint: "Senha", icon: Icons.lock, obscure: true),
+
+                          Align(
+                            alignment: Alignment.centerRight,
+                            child: TextButton(
+                              onPressed: () {},
+                              child: const Text("Esqueceu sua senha?", style: TextStyle(color: Colors.white60, fontSize: 12)),
+                            ),
+                          ),
+                          const SizedBox(height: 10),
+
+                          // Botão ENTRAR com Degradê Verde
+                          Container(
+                            width: double.infinity,
+                            height: 55,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(colors: [Color(0xFF6DA34D), Color(0xFF3B6B2E)]),
+                              borderRadius: BorderRadius.circular(20),
+                              boxShadow: [BoxShadow(color: Colors.black26, blurRadius: 10, offset: Offset(0, 4))],
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
+                              onPressed: _isLoading ? null : _fazerLogin,
+                              child: _isLoading
+                                  ? const CircularProgressIndicator(color: Colors.white)
+                                  : const Text("ENTRAR", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 18)),
+                            ),
+                          ),
+
+                          const Padding(
+                            padding: EdgeInsets.symmetric(vertical: 20),
+                            child: Text("OU", style: TextStyle(color: Colors.white60)),
+                          ),
+
+                          // Botão Google
+                          SizedBox(
+                            width: double.infinity,
+                            height: 55,
+                            child: OutlinedButton.icon(
+                              style: OutlinedButton.styleFrom(
+                                backgroundColor: Colors.white.withOpacity(0.8),
+                                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+                              ),
+                              icon: const Icon(Icons.g_mobiledata, size: 30, color: Colors.black),
+                              label: const Text("Entrar com Google", style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold)),
+                              onPressed: _isLoading ? null : _loginComGoogle,
+                            ),
+                          ),
+                          const SizedBox(height: 20),
+
+                          // Botão Cliente Novo (Laranja/Dourado)
+                          Container(
+                            width: double.infinity,
+                            height: 55,
+                            decoration: BoxDecoration(
+                              gradient: const LinearGradient(colors: [Color(0xFFB87333), Color(0xFF8B4513)]),
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(backgroundColor: Colors.transparent, shadowColor: Colors.transparent),
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage()));
+                              },
+                              child: const Text("Cliente novo? Comece agora!", style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
+          ),
+        ],
       ),
     );
   }
