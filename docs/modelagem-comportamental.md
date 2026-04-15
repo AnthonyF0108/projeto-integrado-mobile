@@ -32,7 +32,7 @@
 ### Diagrama de Sequência
 <img width="657" height="666" alt="image" src="https://github.com/user-attachments/assets/4c36464c-f9a5-41c6-a9cf-0b88a0de9eca" />
 
-## Caso de Uso 3: (coloque o nome da função)
+## Caso de Uso 3: Registro de Venda
 
 ### Fluxo Detalhado
 1. Usuário acessa a funcionalidade
