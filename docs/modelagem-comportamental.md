@@ -19,10 +19,10 @@
 7. Se inválido/cancelado → mensagem de erro e permanece no login.
 
 ### Diagrama de Atividade
-[Inserir Diagrama de Atividade 2 aqui]
+<img width="555" height="601" alt="image" src="https://github.com/user-attachments/assets/be101f40-942f-4abf-bd5b-27ba7c838338" />
 
 ### Diagrama de Sequência
-[Inserir Diagrama de Sequência 2 aqui]
+<img width="579" height="490" alt="image" src="https://github.com/user-attachments/assets/f9af07e4-d99f-4d9a-9513-8d49df481f58" />
 
 ---
 
@@ -43,10 +43,10 @@
 6. Usuário confirma e o sistema salva no banco de dados.
 
 ### Diagrama de Atividade
-[Inserir Diagrama de Atividade 2 aqui]
+<img width="324" height="473" alt="image" src="https://github.com/user-attachments/assets/a3560f12-377f-4832-ab58-e6294207aabb" />
 
 ### Diagrama de Sequência
-[Inserir Diagrama de Sequência 2 aqui]
+<img width="494" height="415" alt="image" src="https://github.com/user-attachments/assets/b93b999d-d9f6-4896-a06f-1fd7c6afedee" />
 
 ---
 
@@ -67,10 +67,10 @@
 6. Sistema exibe confirmação de compra concluída com sucesso via interface do Mercado Pago.
 
 ### Diagrama de Atividade
-[Inserir Diagrama de Atividade 2 aqui]
+<img width="682" height="601" alt="image" src="https://github.com/user-attachments/assets/144265bf-71d0-4043-a5fa-b57e108c55f9" />
 
 ### Diagrama de Sequência
-[Inserir Diagrama de Sequência 2 aqui]
+<img width="519" height="490" alt="image" src="https://github.com/user-attachments/assets/6d78c4df-2569-4374-a459-6a968c55bc48" />
 
 ---
 
@@ -89,10 +89,10 @@
 5. Sistema atualiza o estado visual do ícone na interface.
 
 ### Diagrama de Atividade
-[Inserir Diagrama de Atividade 2 aqui]
+<img width="346" height="429" alt="image" src="https://github.com/user-attachments/assets/12a59aa3-b990-4938-8774-ae294608da6e" />
 
 ### Diagrama de Sequência
-[Inserir Diagrama de Sequência 2 aqui]
+<img width="432" height="357" alt="image" src="https://github.com/user-attachments/assets/e9af3e68-f0a3-4f53-b58e-d28a65af013e" />
 
 ---
 
@@ -113,7 +113,8 @@
 6. Sistema exibe mensagem de sucesso: "Dados atualizados com sucesso".
 
 ### Diagrama de Atividade
-[Inserir Diagrama de Atividade 2 aqui]
+<img width="412" height="483" alt="image" src="https://github.com/user-attachments/assets/045e1244-ef65-4eeb-88af-3eb32afa1ac9" />
 
 ### Diagrama de Sequência
-[Inserir Diagrama de Sequência 2 aqui]
+<img width="463" height="532" alt="image" src="https://github.com/user-attachments/assets/8dfdb0eb-def4-4ab8-aaad-a6509acb1b13" />
+
