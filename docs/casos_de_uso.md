@@ -1,186 +1,90 @@
 # Casos de Uso do Sistema
 
-Os casos de uso descrevem como o usuário interage com o sistema AgroVale.
+
+## UC01 – Autenticação via Google Sign-In
+
+**Ator:** Usuário
+
+**Descrição:** Permite o acesso seguro utilizando a conta Google.
+
+**Fluxo Principal:**
+1. O usuário clica em "Entrar com Google".
+2. O sistema realiza a validação via Firebase.
+3. O acesso ao catálogo é liberado.
+
+**Relacionamento com MVP:** Segurança.
 
 ---
 
-## UC01 – Cadastrar Produto
+## UC02 – Consultar Localização por CEP
 
-**Ator:** Vendedor
+**Ator:** Usuário
 
-**Descrição:** Permite cadastrar um novo produto no sistema.
+**Descrição:** Preenchimento automático de endereço para entrega.
 
 **Fluxo Principal:**
-1. O usuário acessa a tela de cadastro
-2. Informa nome, preço e quantidade
-3. Confirma o cadastro
-4. O sistema salva o produto
+1. O usuário insere o CEP.
+2. O sistema busca os dados (Rua, Bairro, Cidade).
+3. O usuário confirma a localização.
 
-**Fluxo Alternativo:**
-- Se algum campo estiver vazio, o sistema exibe uma mensagem de erro
-
-**Relacionamento com MVP:** Cadastro de produtos
+**Relacionamento com MVP:** Integração de API.
 
 ---
 
-## UC02 – Visualizar Produtos
+## UC03 – Gerir Lista de Favoritos
 
-**Ator:** Vendedor
+**Ator:** Usuário
 
-**Descrição:** Permite visualizar os produtos cadastrados.
+**Descrição:** Permite salvar itens para consulta rápida.
 
 **Fluxo Principal:**
-1. O usuário acessa a lista de produtos
-2. O sistema exibe os produtos cadastrados
+1. O usuário seleciona um produto.
+2. Clica no ícone de favoritar.
+3. O sistema armazena o item na lista do usuário.
 
-**Fluxo Alternativo:**
-- Se não houver produtos, o sistema exibe mensagem "Nenhum produto cadastrado"
-
-**Relacionamento com MVP:** Visualização de produtos
+**Relacionamento com MVP:** Experiência do Usuário (UX).
 
 ---
 
-## UC03 – Registrar Venda
+## UC04 – Atualizar Identificação (RG)
 
-**Ator:** Vendedor
+**Ator:** Usuário
 
-**Descrição:** Permite registrar uma venda.
+**Descrição:** Registro do documento para validação de compra.
 
 **Fluxo Principal:**
-1. O usuário seleciona um produto
-2. Informa a quantidade
-3. Confirma a venda
-4. O sistema registra a venda
+1. O usuário acessa o perfil.
+2. Insere o número do RG.
+3. O sistema salva a informação.
 
-**Fluxo Alternativo:**
-- Se a quantidade for maior que o estoque, o sistema exibe erro
-
-**Relacionamento com MVP:** Registro de vendas
+**Relacionamento com MVP:** Segurança e Cadastro.
 
 ---
 
-## UC04 – Atualizar Estoque
+## UC05 – Realizar Pagamento Funcional
 
-**Ator:** Sistema
+**Ator:** Usuário
 
-**Descrição:** Atualiza automaticamente o estoque após venda.
+**Descrição:** Fluxo de conclusão de compra.
 
 **Fluxo Principal:**
-1. Uma venda é realizada
-2. O sistema reduz a quantidade no estoque
+1. O usuário inicia o checkout.
+2. O sistema processa o pagamento.
+3. O pedido é confirmado.
 
-**Fluxo Alternativo:**
-- Se houver erro, o sistema não atualiza o estoque
-
-**Relacionamento com MVP:** Controle de estoque
+**Relacionamento com MVP:** Sistema de Pagamento.
 
 ---
 
-## UC05 – Visualizar Histórico de Vendas
+## UC06 – Navegação no Catálogo
 
-**Ator:** Vendedor
+**Ator:** Usuário
 
-**Descrição:** Permite visualizar o histórico de vendas.
-
-**Fluxo Principal:**
-1. O usuário acessa a tela de histórico
-2. O sistema exibe as vendas realizadas
-
-**Fluxo Alternativo:**
-- Se não houver vendas, o sistema exibe mensagem "Nenhuma venda registrada"
-
-**Relacionamento com MVP:** Histórico de vendas
-
----
-
-## UC06 – Editar Produto
-
-**Ator:** Vendedor
-
-**Descrição:** Permite alterar as informações de um produto já cadastrado.
+**Descrição:** Visualização dos itens disponíveis.
 
 **Fluxo Principal:**
-1. O usuário seleciona um produto na lista
-2. O sistema exibe os dados atuais
-3. O usuário altera as informações desejadas
-4. O usuário confirma a alteração
-5. O sistema salva as mudanças
+1. O usuário abre o app.
+2. O sistema carrega os produtos disponíveis.
+3. O usuário navega entre as categorias.
 
-**Fluxo Alternativo:**
-- Se o usuário cancelar, os dados originais permanecem inalterados
-
-**Relacionamento com MVP:** Gestão de produtos
-
----
-
-## UC07 – Excluir Produto
-
-**Ator:** Vendedor
-
-**Descrição:** Permite remover um produto do catálogo.
-
-**Fluxo Principal:**
-1. O usuário seleciona o produto
-2. O usuário solicita a exclusão
-3. O sistema pede confirmação
-4. O usuário confirma a ação
-5. O sistema remove o produto da base de dados
-
-**Fluxo Alternativo:**
-- Se o usuário não confirmar, a exclusão é cancelada
-
-**Relacionamento com MVP:** Gestão de produtos
-
----
-
-## UC08 – Autenticação de Usuário
-
-**Ator:** Vendedor
-
-**Descrição:** Permite que o vendedor acesse as funcionalidades do sistema.
-
-**Fluxo Principal:**
-1. O usuário informa usuário e senha
-2. O sistema valida as credenciais
-3. O sistema libera o acesso ao painel principal
-
-**Fluxo Alternativo:**
-- Se os dados estiverem incorretos, o sistema exibe erro de login
-
-**Relacionamento com MVP:** Segurança do sistema
-
----
-
-## UC09 – Cancelar Venda
-
-**Ator:** Vendedor
-
-**Descrição:** Permite cancelar uma venda registrada por engano.
-
-**Fluxo Principal:**
-1. O usuário acessa o histórico de vendas
-2. Seleciona a venda e solicita o cancelamento
-3. O sistema confirma a ação e devolve o item ao estoque
-
-**Fluxo Alternativo:**
-- Se a venda já estiver cancelada, o sistema notifica o usuário
-
-**Relacionamento com MVP:** Controle de estoque e vendas
-
----
-
-## UC10 – Gerar Relatório de Vendas
-
-**Ator:** Vendedor
-
-**Descrição:** Permite visualizar o faturamento total e quantidade de itens vendidos.
-
-**Fluxo Principal:**
-1. O usuário acessa a aba de relatórios
-2. O sistema soma as vendas realizadas no período
-3. O sistema exibe o total arrecadado
-
-**Fluxo Alternativo:**
-- Se não houver dados, o sistema exibe valores zerados
-
-**Relacionamento com MVP:** Gestão financeira
+**Relacionamento com MVP:** Interface Principal.
