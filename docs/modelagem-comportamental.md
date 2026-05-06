@@ -48,7 +48,7 @@
 ### Diagrama de Sequência
 <img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
 
-## Caso de Uso 4: Cancelamento e Estorno (Novo)
+## Caso de Uso 4: Cancelamento e Estorno
 
 ### Fluxo Detalhado
 1. Usuário acessa o histórico de vendas
@@ -60,12 +60,12 @@
 7. Sistema confirma a operação ao usuário
 
 ### Diagrama de Atividade
-<img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
+
 
 ### Diagrama de Sequência
-<img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
 
-## Caso de Uso 5: Geração de Resumo Financeiro (Novo)
+
+## Caso de Uso 5: Geração de Resumo Financeiro
 
 ### Fluxo Detalhado
 1. Usuário acessa a aba de Dashboard/Relatórios
@@ -74,7 +74,7 @@
 4. Sistema apresenta o total faturado e métricas na tela
 
 ### Diagrama de Atividade
-<img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
+
 
 ### Diagrama de Sequência
-<img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
+
