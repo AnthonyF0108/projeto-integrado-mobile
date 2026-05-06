@@ -1,35 +1,24 @@
-# Backlog do Produto
+# Backlog do Produto - AgroVale
 
-O backlog do produto representa a lista de funcionalidades que devem ser desenvolvidas no sistema, organizadas em épicos e user stories.
 
-## Épico 1 – Gestão de Catálogo e Estoque
-
+## Épico 1 – Experiência do Utilizador e Localização
 | User Story | Descrição | Prioridade |
 |------------|-----------|-----------|
-| US01 | Cadastro de Produto | Alta |
-| US02 | Visualização de Produtos | Alta |
-| US03 | Edição de Produtos | Média |
-| US04 | Exclusão de Produtos | Baixa |
-| US05 | Atualização Automática de Estoque | Alta |
+| US01 | Busca de Endereço via CEP | Alta |
+| US02 | Navegação por Categorias de Produtos | Alta |
+| US03 | Lista de Favoritos (Adicionar/Remover) | Média |
+| US04 | Melhorias de UX e Fluidez de Interface | Baixa |
 
-## Épico 2 – Operações de Venda
-
+## Épico 2 – Transações e Checkout
 | User Story | Descrição | Prioridade |
 |------------|-----------|-----------|
-| US06 | Registro de Vendas | Alta |
-| US07 | Cancelamento e Estorno de Vendas | Média |
+| US05 | Sistema de Pagamento Funcional | Alta |
+| US06 | Finalização de Pedido (Checkout) | Alta |
+| US07 | Histórico de Compras Realizadas | Média |
 
-## Épico 3 – Inteligência de Negócio e Relatórios
-
+## Épico 3 – Segurança e Identificação
 | User Story | Descrição | Prioridade |
 |------------|-----------|-----------|
-| US08 | Histórico Detalhado de Vendas | Média |
-| US09 | Resumo Financeiro (Dashboard) | Média |
-
-## Épico 4 – Segurança e Interface
-
-| User Story | Descrição | Prioridade |
-|------------|-----------|-----------|
-| US10 | Autenticação de Usuário (Login) | Alta |
-| US11 | Melhorias na Interface e Usabilidade | Baixa |
-
+| US08 | Autenticação via Google Sign-In | Alta |
+| US09 | Registo de Dados de Identificação (RG) | Alta |
+| US10 | Gestão de Perfil do Utilizador | Baixa |
