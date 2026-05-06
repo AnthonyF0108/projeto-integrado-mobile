@@ -34,13 +34,44 @@
 
 ## Caso de Uso 3: Registro de Venda
 
-### Fluxo Detalhado
-1. Usuário acessa a funcionalidade
-2. Usuário realiza a ação (ex: criar tarefa, produto, etc)
-3. Sistema processa os dados
-4. Sistema salva no banco de dados
-5. Sistema retorna o resultado
+### Fluxo Detalhado e Estoque
+1. Usuário seleciona o produto e informa a quantidade
+2. Sistema verifica disponibilidade no estoque
+3. Sistema processa o pagamento/venda
+4. Sistema subtrai a quantidade do banco de dados
+5. Sistema registra a venda no histórico
 6. Sistema exibe confirmação para o usuário
+
+### Diagrama de Atividade
+<img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
+
+### Diagrama de Sequência
+<img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
+
+## Caso de Uso 4: Cancelamento e Estorno (Novo)
+
+### Fluxo Detalhado
+1. Usuário acessa o histórico de vendas
+2. Usuário seleciona uma venda ativa
+3. Usuário solicita o cancelamento
+4. Sistema valida se a venda pode ser cancelada
+5. Sistema incrementa a quantidade do produto de volta ao estoque
+6. Sistema atualiza o status da venda para "Cancelada"
+7. Sistema confirma a operação ao usuário
+
+### Diagrama de Atividade
+<img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
+
+### Diagrama de Sequência
+<img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
+
+## Caso de Uso 5: Geração de Resumo Financeiro (Novo)
+
+### Fluxo Detalhado
+1. Usuário acessa a aba de Dashboard/Relatórios
+2. Sistema busca todas as vendas com status "Concluída"
+3. Sistema realiza o somatório de valores e quantidades
+4. Sistema apresenta o total faturado e métricas na tela
 
 ### Diagrama de Atividade
 <img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
