@@ -1,80 +1,75 @@
 # Modelagem Comportamental
 
-## Caso de Uso 1: Login
+## Caso de Uso 1: Autenticação via Google Sign-In
 
 ### Fluxo Detalhado
-1. Usuário abre o aplicativo
-2. Usuário insere email e senha
-3. Sistema valida os dados
-4. Sistema consulta o banco de dados
-5. Se válido → acesso liberado
-6. Se inválido → mensagem de erro
+1. Usuário abre o aplicativo e clica em "Entrar com Google"
+2. Sistema aciona o Firebase Auth / Google Sign-In
+3. Sistema exibe a interface nativa do Google para escolha da conta
+4. Google retorna o token de autenticação
+5. Sistema valida o token com o Firebase
+6. Se válido → acesso liberado ao catálogo
+7. Se inválido/cancelado → mensagem de erro e permanece no login
 
 ### Diagrama de Atividade
-<img width="957" height="773" alt="image" src="https://github.com/user-attachments/assets/8bf554ff-c709-4d68-b243-05b5e0a7c27c" />
-
-### Diagrama de Sequência
-<img width="584" height="796" alt="image" src="https://github.com/user-attachments/assets/d530b2eb-1e77-4a7f-9e35-592077a852dd" />
-
-
-## Caso de Uso 2: Cadastro
-
-### Fluxo Detalhado
-1. Usuário acessa tela de cadastro
-2. Usuário preenche os dados
-3. Sistema valida as informações
-4. Sistema salva no banco de dados
-5. Sistema exibe mensagem de sucesso
-
-### Diagrama de Atividade
-<img width="714" height="655" alt="image" src="https://github.com/user-attachments/assets/ee01d483-c165-4aa6-ad35-3f40b6fd9041" />
-
-### Diagrama de Sequência
-<img width="657" height="666" alt="image" src="https://github.com/user-attachments/assets/4c36464c-f9a5-41c6-a9cf-0b88a0de9eca" />
-
-## Caso de Uso 3: Registro de Venda
-
-### Fluxo Detalhado e Estoque
-1. Usuário seleciona o produto e informa a quantidade
-2. Sistema verifica disponibilidade no estoque
-3. Sistema processa o pagamento/venda
-4. Sistema subtrai a quantidade do banco de dados
-5. Sistema registra a venda no histórico
-6. Sistema exibe confirmação para o usuário
-
-### Diagrama de Atividade
-<img width="681" height="763" alt="image" src="https://github.com/user-attachments/assets/8c735815-f673-4373-82ff-7582245affd5" />
-
-### Diagrama de Sequência
-<img width="584" height="695" alt="image" src="https://github.com/user-attachments/assets/3c492f87-93ca-4a07-846e-1b34650b720b" />
-
-## Caso de Uso 4: Cancelamento e Estorno
-
-### Fluxo Detalhado
-1. Usuário acessa o histórico de vendas
-2. Usuário seleciona uma venda ativa
-3. Usuário solicita o cancelamento
-4. Sistema valida se a venda pode ser cancelada
-5. Sistema incrementa a quantidade do produto de volta ao estoque
-6. Sistema atualiza o status da venda para "Cancelada"
-7. Sistema confirma a operação ao usuário
-
-### Diagrama de Atividade
-
 
 ### Diagrama de Sequência
 
 
-## Caso de Uso 5: Geração de Resumo Financeiro
+## Caso de Uso 2: Localização por CEP
 
 ### Fluxo Detalhado
-1. Usuário acessa a aba de Dashboard/Relatórios
-2. Sistema busca todas as vendas com status "Concluída"
-3. Sistema realiza o somatório de valores e quantidades
-4. Sistema apresenta o total faturado e métricas na tela
+1. Usuário acessa tela de perfil ou checkout
+2. Usuário insere o número do CEP
+3. Sistema realiza requisição assíncrona para API externa (ViaCEP)
+4. API retorna dados de endereço (Logradouro, Bairro, Localidade)
+5. Sistema preenche automaticamente os campos na interface
+6. Usuário confirma e o sistema salva no banco de dados
 
 ### Diagrama de Atividade
 
+### Diagrama de Sequência
 
+
+## Caso de Uso 3: Finalização de Pagamento (Checkout)
+
+### Fluxo Detalhado
+1. Usuário seleciona o produto e inicia o checkout
+2. Sistema valida se o perfil possui RG e CEP cadastrados
+3. Sistema processa a transação via módulo de pagamento
+4. Sistema registra a venda com status "Confirmado" no histórico
+5. Sistema exibe confirmação de compra concluída com sucesso
+
+### Diagrama de Atividade
+
+### Diagrama de Sequência
+
+
+## Caso de Uso 4: Gestão de Favoritos
+
+### Fluxo Detalhado
+1. Usuário navega pelo catálogo de produtos
+2. Usuário clica no ícone de "Favoritar" (Coração)
+3. Sistema verifica a sessão ativa do usuário
+4. Sistema persiste o ID do produto na lista de favoritos vinculada ao usuário
+5. Sistema atualiza o estado visual do ícone na interface
+
+### Diagrama de Atividade
+
+### Diagrama de Sequência
+
+
+## Caso de Uso 5: Atualização de Identificação (RG)
+
+### Fluxo Detalhado
+1. Usuário acessa a aba de perfil/configurações
+2. Usuário insere o número do RG no campo de texto
+3. Sistema valida se o campo não está vazio
+4. Sistema envia o comando de atualização para a base de dados
+5. Sistema exibe mensagem de sucesso: "Perfil atualizado"
+
+### Diagrama de Atividade
+
+### Diagrama de Sequência
 ### Diagrama de Sequência
 
