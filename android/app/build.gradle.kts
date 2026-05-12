@@ -48,10 +48,7 @@ flutter {
 }
 
 dependencies {
-
     implementation(platform("com.google.firebase:firebase-bom:34.10.0"))
-
     implementation("com.google.firebase:firebase-analytics")
-
     implementation("com.google.android.gms:play-services-auth:21.0.0")
 }

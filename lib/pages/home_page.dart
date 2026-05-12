@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import '../services/firestore_service.dart';
 import 'cart_page.dart';
 import '../widgets/favorito_button.dart';
+import 'chat_ia_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -104,7 +105,6 @@ class _HomePageState extends State<HomePage> {
               String id = produtosFiltrados[index].id;
               double preco = (p['preco'] is int) ? (p['preco'] as int).toDouble() : (p['preco'] as double? ?? 0.0);
 
-              // Preparamos o Map com o ID incluso para o botão de favorito
               Map<String, dynamic> produtoDados = {...p, 'id': id};
 
               return GestureDetector(
@@ -120,7 +120,6 @@ class _HomePageState extends State<HomePage> {
                       Expanded(
                         child: Stack(
                           children: [
-                            // Imagem do Produto
                             Positioned.fill(
                               child: ClipRRect(
                                 borderRadius: const BorderRadius.vertical(top: Radius.circular(15)),
@@ -133,7 +132,6 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                             ),
-                            // --- BOTÃO DE FAVORITO NA TELA PRINCIPAL ---
                             if (user != null)
                               Positioned(
                                 top: 8,
@@ -165,6 +163,13 @@ class _HomePageState extends State<HomePage> {
             },
           );
         },
+      ),
+
+      // BOTÃO DE CHAT COM IA ADICIONADO AQUI
+      floatingActionButton: FloatingActionButton(
+        onPressed: () => abrirChatIA(context),
+        backgroundColor: Colors.green,
+        child: const Icon(Icons.auto_awesome, color: Colors.black),
       ),
     );
   }
