@@ -6,6 +6,7 @@ import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -16,10 +17,8 @@ class CartPage extends StatefulWidget {
 
 class _CartPageState extends State<CartPage> {
   Map<String, dynamic>? dadosEndereco;
-  final String accessToken = "APP_USR-484266804459944-041019-a62f1c4773e8292111059a738ced3a2e-3286771561";
+  final String accessToken = dotenv.env['MP_ACCESS_TOKEN'] ?? '';
 
-  // ⚠️ Após o deploy da Cloud Function, substitua pela URL real
-  // Exemplo: "https://us-central1-agrovale-app.cloudfunctions.net/webhookMercadoPago"
   final String webhookUrl = "https://webhookmercadopago-i2giblwa3q-uc.a.run.app";
 
   @override

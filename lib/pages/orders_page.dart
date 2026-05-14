@@ -6,12 +6,12 @@ import 'package:intl/intl.dart';
 import 'dart:convert';
 import 'package:http/http.dart' as http;
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 class OrdersPage extends StatelessWidget {
   const OrdersPage({super.key});
 
-  static const String _accessToken =
-      "APP_USR-484266804459944-041019-a62f1c4773e8292111059a738ced3a2e-3286771561";
+  static String get _accessToken => dotenv.env['MP_ACCESS_TOKEN'] ?? '';
   static const String _webhookUrl =
       "https://webhookmercadopago-i2giblwa3q-uc.a.run.app";
 
