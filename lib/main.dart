@@ -1,27 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-// import 'firebase_options.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import 'pages/login_page.dart';
 import 'pages/home_page.dart';
-import 'pages/favorites_page.dart'; // Importação da sua nova página
+import 'pages/favorites_page.dart';
 import 'pages/orders_page.dart';
 import 'pages/profile_page.dart';
 
-import 'package:flutter_dotenv/flutter_dotenv.dart';
-
-void main() async {
-  await dotenv.load(fileName: ".env");
-  runApp(const MyApp());
-}
-
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
-  await Firebase.initializeApp(
-    // options: DefaultFirebaseOptions.currentPlatform,
-  );
-
+  await dotenv.load(fileName: ".env");
+  await Firebase.initializeApp();
   runApp(const AgroValeApp());
 }
 
@@ -55,10 +45,9 @@ class MainNavigation extends StatefulWidget {
 class _MainNavigationState extends State<MainNavigation> {
   int _paginaAtual = 0;
 
-  // Lista de telas atualizada com FavoritesPage
   final List<Widget> _telas = const [
     HomePage(),
-    FavoritesPage(), // Substituiu a SearchPage
+    FavoritesPage(),
     OrdersPage(),
     ProfilePage(),
   ];
@@ -66,7 +55,6 @@ class _MainNavigationState extends State<MainNavigation> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // Usar IndexedStack mantém o estado das páginas (ex: não reseta a busca ao voltar)
       body: IndexedStack(
         index: _paginaAtual,
         children: _telas,
@@ -75,36 +63,14 @@ class _MainNavigationState extends State<MainNavigation> {
         currentIndex: _paginaAtual,
         selectedItemColor: Colors.green,
         unselectedItemColor: Colors.grey,
-        backgroundColor: const Color(0xFF1A1A1A), // Combina com o seu tema dark
+        backgroundColor: const Color(0xFF1A1A1A),
         type: BottomNavigationBarType.fixed,
-        onTap: (index) {
-          setState(() {
-            _paginaAtual = index;
-          });
-        },
+        onTap: (index) => setState(() => _paginaAtual = index),
         items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home_outlined),
-            activeIcon: Icon(Icons.home),
-            label: "Home",
-          ),
-          // --- MUDANÇA AQUI: PESQUISAR -> FAVORITOS ---
-          BottomNavigationBarItem(
-            icon: Icon(Icons.favorite_outline),
-            activeIcon: Icon(Icons.favorite),
-            label: "Favoritos",
-          ),
-          // --------------------------------------------
-          BottomNavigationBarItem(
-            icon: Icon(Icons.assignment_outlined),
-            activeIcon: Icon(Icons.assignment),
-            label: "Pedidos",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person_outline),
-            activeIcon: Icon(Icons.person),
-            label: "Conta",
-          ),
+          BottomNavigationBarItem(icon: Icon(Icons.home_outlined), activeIcon: Icon(Icons.home), label: "Home"),
+          BottomNavigationBarItem(icon: Icon(Icons.favorite_outline), activeIcon: Icon(Icons.favorite), label: "Favoritos"),
+          BottomNavigationBarItem(icon: Icon(Icons.assignment_outlined), activeIcon: Icon(Icons.assignment), label: "Pedidos"),
+          BottomNavigationBarItem(icon: Icon(Icons.person_outline), activeIcon: Icon(Icons.person), label: "Conta"),
         ],
       ),
     );
