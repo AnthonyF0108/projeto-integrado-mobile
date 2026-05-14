@@ -1,5 +1,6 @@
 import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 // Resultado da mensagem: texto + produtos recomendados
 class RespostaIA {
@@ -10,7 +11,7 @@ class RespostaIA {
 }
 
 class GeminiService {
-  static const _apiKey = 'AIzaSyBiferOjpHsXHciObG65BEoxDV_UV_tEWk';
+  static String get _apiKey => dotenv.env['GEMINI_API_KEY'] ?? '';
 
   final GenerativeModel _model;
   final FirebaseFirestore _firestore;
