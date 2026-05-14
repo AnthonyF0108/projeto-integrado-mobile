@@ -13,7 +13,6 @@ void abrirChatIA(BuildContext context) {
   );
 }
 
-// Mensagem pode ter texto e/ou lista de produtos recomendados
 class _Mensagem {
   final String texto;
   final bool isCliente;
@@ -125,7 +124,6 @@ class _ChatIASheetState extends State<_ChatIASheet> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     _Bolha(mensagem: m),
-                    // Cards de produto abaixo da bolha da IA
                     if (!m.isCliente && m.produtos.isNotEmpty)
                       _ListaProdutos(
                         produtos: m.produtos,
@@ -171,7 +169,6 @@ class _ChatIASheetState extends State<_ChatIASheet> {
   }
 }
 
-// ─── Lista de cards de produto recomendado ───────────────────────────────────
 class _ListaProdutos extends StatelessWidget {
   final List<Map<String, dynamic>> produtos;
   final void Function(Map<String, dynamic>) onAdicionarCarrinho;
@@ -214,7 +211,6 @@ class _CardProduto extends StatelessWidget {
       ),
       child: Row(
         children: [
-          // Imagem do produto
           ClipRRect(
             borderRadius: const BorderRadius.horizontal(left: Radius.circular(12)),
             child: imagem.isNotEmpty
@@ -227,7 +223,6 @@ class _CardProduto extends StatelessWidget {
             )
                 : _semImagem(),
           ),
-          // Info
           Expanded(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 8),
@@ -253,7 +248,6 @@ class _CardProduto extends StatelessWidget {
               ),
             ),
           ),
-          // Botão carrinho
           Padding(
             padding: const EdgeInsets.only(right: 10),
             child: GestureDetector(
@@ -281,7 +275,6 @@ class _CardProduto extends StatelessWidget {
   );
 }
 
-// ─── Cabeçalho ───────────────────────────────────────────────────────────────
 class _Cabecalho extends StatelessWidget {
   final VoidCallback onFechar;
   const _Cabecalho({required this.onFechar});
@@ -337,7 +330,6 @@ class _Cabecalho extends StatelessWidget {
   }
 }
 
-// ─── Bolha de mensagem ────────────────────────────────────────────────────────
 class _Bolha extends StatelessWidget {
   final _Mensagem mensagem;
   const _Bolha({required this.mensagem});
@@ -409,7 +401,6 @@ class _Bolha extends StatelessWidget {
       '${dt.hour.toString().padLeft(2, '0')}:${dt.minute.toString().padLeft(2, '0')}';
 }
 
-// ─── Digitando... ─────────────────────────────────────────────────────────────
 class _BolhaDigitando extends StatelessWidget {
   const _BolhaDigitando();
 
@@ -469,7 +460,6 @@ class _PontoState extends State<_Ponto> with SingleTickerProviderStateMixin {
   );
 }
 
-// ─── Campo de entrada ─────────────────────────────────────────────────────────
 class _Campo extends StatelessWidget {
   final TextEditingController controller;
   final bool carregando;

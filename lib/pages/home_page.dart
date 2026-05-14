@@ -165,7 +165,6 @@ class _HomePageState extends State<HomePage> {
         },
       ),
 
-      // BOTÃO DE CHAT COM IA ADICIONADO AQUI
       floatingActionButton: FloatingActionButton(
         onPressed: () => abrirChatIA(context),
         backgroundColor: Colors.green,

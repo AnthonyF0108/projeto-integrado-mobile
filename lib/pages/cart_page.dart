@@ -38,7 +38,6 @@ class _CartPageState extends State<CartPage> {
     }
   }
 
-  // PASSO 1: Salva pedido no Firestore e retorna o ID gerado
   Future<String> _criarPedidoFirestore(
       double total, List<QueryDocumentSnapshot> itens) async {
     final user = FirebaseAuth.instance.currentUser!;
@@ -53,7 +52,6 @@ class _CartPageState extends State<CartPage> {
     return docRef.id;
   }
 
-  // PASSO 2: Limpa o carrinho após criar o pedido
   Future<void> _limparCarrinho(List<QueryDocumentSnapshot> itens) async {
     final batch = FirebaseFirestore.instance.batch();
     for (var d in itens) batch.delete(d.reference);
@@ -76,15 +74,14 @@ class _CartPageState extends State<CartPage> {
       List<String> nomePartes =
       (user?.displayName ?? "Comprador Teste").split(" ");
 
-      // CORREÇÃO: Cria o pedido ANTES de chamar o MP para ter o ID
       final pedidoId = await _criarPedidoFirestore(total, itens);
 
       final body = {
         "transaction_amount": total,
         "description": "Compra AgroVale",
         "payment_method_id": metodo,
-        "external_reference": pedidoId, // ← ID do Firestore
-        "notification_url": webhookUrl, // ← URL da Cloud Function
+        "external_reference": pedidoId,
+        "notification_url": webhookUrl,
         "payer": {
           "email": user?.email ?? "teste@projeto.com",
           "first_name": nomePartes[0],
@@ -119,10 +116,8 @@ class _CartPageState extends State<CartPage> {
       final data = jsonDecode(response.body);
 
       if (response.statusCode == 201 || response.statusCode == 200) {
-        // Limpa o carrinho só após confirmação do MP
         await _limparCarrinho(itens);
 
-        // Guarda o paymentId no pedido para consultas futuras
         await FirebaseFirestore.instance
             .collection('pedidos')
             .doc(pedidoId)
@@ -135,7 +130,6 @@ class _CartPageState extends State<CartPage> {
           _abrirUrl(data['transaction_details']['external_resource_url']);
         }
       } else {
-        // Se o MP recusou, deleta o pedido criado para não ficar lixo
         await FirebaseFirestore.instance
             .collection('pedidos')
             .doc(pedidoId)

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../services/auth_service.dart';
-import '../main.dart'; // Para navegar para a MainNavigation depois
+import '../main.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -22,8 +22,6 @@ class _RegisterPageState extends State<RegisterPage> {
 
     final String email = _emailController.text.trim();
     final String password = _passwordController.text.trim();
-
-    // Aqui chamamos a função de REGISTRAR em vez da de login
     final user = await AuthService().registarComEmailSenha(email, password);
 
     setState(() {
@@ -31,12 +29,11 @@ class _RegisterPageState extends State<RegisterPage> {
     });
 
     if (user != null) {
-      // Conta criada com sucesso! Vai direto para o app.
       if (mounted) {
         Navigator.pushAndRemoveUntil(
           context,
           MaterialPageRoute(builder: (context) => const MainNavigation()),
-          (route) => false, // Isso limpa o histórico para o usuário não voltar para o cadastro
+          (route) => false,
         );
       }
     } else {

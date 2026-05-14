@@ -54,7 +54,6 @@ class _LoginPageState extends State<LoginPage> {
     super.dispose();
   }
 
-  // Widget auxiliar para os campos de texto estilo "Glass"
   Widget _buildTextField({
     required TextEditingController controller,
     required String hint,
@@ -87,7 +86,6 @@ class _LoginPageState extends State<LoginPage> {
     return Scaffold(
       body: Stack(
         children: [
-          // Fundo com Degradê Radial (AgroVale Style)
           Container(
             decoration: const BoxDecoration(
               gradient: RadialGradient(
@@ -103,18 +101,17 @@ class _LoginPageState extends State<LoginPage> {
                 padding: const EdgeInsets.symmetric(horizontal: 30),
                 child: Column(
                   children: [
-                    // LOGO (Aqui você pode colocar um Image.asset da sua logo)
+
                     Image.asset(
-                      'assets/images/logo_agrovale.png', // <-- CERTIFIQUE-SE DE QUE O NOME DO ARQUIVO ESTÁ CORRETO AQUI
-                      height: 120, // Ajuste a altura se necessário para ficar bom no layout
-                      fit: BoxFit.contain, // Garante que a imagem não seja cortada
+                      'assets/images/logo_agrovale.png',
+                      height: 120,
+                      fit: BoxFit.contain,
                     ),
                     const SizedBox(height: 20),
                     const Text("Criar Conta", style: TextStyle(color: Colors.white, fontSize: 22, fontWeight: FontWeight.bold)),
                     const Text("Cadastre-se para comprar com a gente.", style: TextStyle(color: Colors.white70)),
                     const SizedBox(height: 40),
 
-                    // Container Centralizado (Card de Login)
                     Container(
                       padding: const EdgeInsets.all(20),
                       decoration: BoxDecoration(
@@ -137,7 +134,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 10),
 
-                          // Botão ENTRAR com Degradê Verde
                           Container(
                             width: double.infinity,
                             height: 55,
@@ -160,7 +156,6 @@ class _LoginPageState extends State<LoginPage> {
                             child: Text("OU", style: TextStyle(color: Colors.white60)),
                           ),
 
-                          // Botão Google
                           SizedBox(
                             width: double.infinity,
                             height: 55,
@@ -176,7 +171,6 @@ class _LoginPageState extends State<LoginPage> {
                           ),
                           const SizedBox(height: 20),
 
-                          // Botão Cliente Novo (Laranja/Dourado)
                           Container(
                             width: double.infinity,
                             height: 55,

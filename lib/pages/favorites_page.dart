@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import '../services/firestore_service.dart'; // Importe o serviço para o carrinho
+import '../services/firestore_service.dart';
 
 class FavoritesPage extends StatelessWidget {
   const FavoritesPage({super.key});
@@ -49,7 +49,6 @@ class FavoritesPage extends StatelessWidget {
             itemBuilder: (context, index) {
               var p = favs[index].data() as Map<String, dynamic>;
               String id = favs[index].id;
-              // Garantir que o preço seja double para evitar erros de formatação
               double preco = (p['preco'] is int)
                   ? (p['preco'] as int).toDouble()
                   : (p['preco'] as double? ?? 0.0);
@@ -58,7 +57,6 @@ class FavoritesPage extends StatelessWidget {
                 color: const Color(0xFF1A1A1A),
                 margin: const EdgeInsets.only(bottom: 10),
                 child: ListTile(
-                  // AO CLICAR NO ITEM: Abre os detalhes
                   onTap: () => _mostrarDetalhes(context, p, preco, id, user),
                   leading: ClipRRect(
                     borderRadius: BorderRadius.circular(8),
@@ -86,7 +84,6 @@ class FavoritesPage extends StatelessWidget {
     );
   }
 
-  // --- FUNÇÃO DE DETALHES (REUTILIZADA) ---
   void _mostrarDetalhes(BuildContext context, Map<String, dynamic> p,
       double preco, String id, User? user) {
     showModalBottomSheet(
@@ -153,7 +150,7 @@ class FavoritesPage extends StatelessWidget {
                               'preco': preco,
                               'imagem': p['imagem']
                             });
-                            Navigator.pop(context); // Fecha o modal
+                            Navigator.pop(context);
                             ScaffoldMessenger.of(context).showSnackBar(
                                 SnackBar(content: Text("${p['nome']} adicionado ao carrinho!")));
                           }

@@ -59,7 +59,6 @@ class OrdersPage extends StatelessWidget {
       if (response.statusCode == 201 || response.statusCode == 200) {
         final qrCode =
         data['point_of_interaction']['transaction_data']['qr_code'];
-        // Atualiza o paymentId no pedido existente
         await FirebaseFirestore.instance
             .collection('pedidos')
             .doc(pedidoId)

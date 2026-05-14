@@ -2,7 +2,6 @@ import 'package:google_generative_ai/google_generative_ai.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
-// Resultado da mensagem: texto + produtos recomendados
 class RespostaIA {
   final String texto;
   final List<Map<String, dynamic>> produtos;
@@ -17,7 +16,6 @@ class GeminiService {
   final FirebaseFirestore _firestore;
   final List<Content> _historico = [];
 
-  // Cache do catálogo para cruzar com a resposta
   List<Map<String, dynamic>> _catalogoCache = [];
 
   GeminiService()
@@ -69,7 +67,6 @@ class GeminiService {
     }
   }
 
-  // Cruza os nomes citados na resposta da IA com o catálogo real
   List<Map<String, dynamic>> _extrairProdutosRecomendados(String textoResposta) {
     final recomendados = <Map<String, dynamic>>[];
     for (final produto in _catalogoCache) {
@@ -93,7 +90,7 @@ CATÁLOGO ATUAL:
 $catalogo
 
 INSTRUÇÕES:
-- Recomende no máximo 2-3 produtos que melhor resolvam o problema.
+- Recomende no máximo 3-4 produtos que melhor resolvam o problema.
 - Sempre cite o nome exato do produto como está no catálogo.
 - Explique brevemente por que cada produto é indicado.
 - Use linguagem amigável, sem jargões técnicos.

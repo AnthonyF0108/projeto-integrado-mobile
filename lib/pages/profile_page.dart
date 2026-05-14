@@ -6,7 +6,7 @@ import '../services/firestore_service.dart';
 import 'login_page.dart';
 import 'package:cpf_cnpj_validator/cpf_validator.dart';
 import 'package:mask_text_input_formatter/mask_text_input_formatter.dart';
-import 'package:http/http.dart' as http; // Import para a API
+import 'package:http/http.dart' as http;
 import 'dart:convert';
 
 class ProfilePage extends StatelessWidget {
@@ -48,7 +48,6 @@ class ProfilePage extends StatelessWidget {
                 CircleAvatar(
                   radius: 50,
                   backgroundColor: Colors.green.withOpacity(0.1),
-                  // Verifica se o objeto 'user' do Firebase Auth possui uma URL de foto
                   backgroundImage: (user != null && user.photoURL != null)
                       ? NetworkImage(user.photoURL!)
                       : null,
@@ -63,7 +62,7 @@ class ProfilePage extends StatelessWidget {
 
                 _buildInfoTile(Icons.phone, "Telefone", dados['telefone']),
                 _buildInfoTile(Icons.badge, "CPF", dados['cpf']),
-                _buildInfoTile(Icons.fingerprint, "RG", dados['rg']), // Novo campo visual
+                _buildInfoTile(Icons.fingerprint, "RG", dados['rg']),
                 _buildInfoTile(Icons.map, "CEP", dados['cep']),
                 _buildInfoTile(Icons.location_on, "Endereço",
                     (dados['rua'] != null) ? "${dados['rua']}, ${dados['numero']} - ${dados['bairro']}" : null),
@@ -91,7 +90,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // --- LOGICA DE BUSCA DE CEP ---
   Future<Map<String, dynamic>?> _buscarCEP(String cep) async {
     final cleanCep = cep.replaceAll(RegExp(r'[^0-9]'), '');
     if (cleanCep.length != 8) return null;
@@ -116,7 +114,7 @@ class ProfilePage extends StatelessWidget {
     final cidadeController = TextEditingController(text: d['cidade']);
     final estadoController = TextEditingController(text: d['estado']);
     final cpfController = TextEditingController(text: d['cpf']);
-    final rgController = TextEditingController(text: d['rg']); // Novo controller
+    final rgController = TextEditingController(text: d['rg']);
     final cepController = TextEditingController(text: d['cep']);
 
     final cpfMask = MaskTextInputFormatter(mask: '###.###.###-##', filter: {"#": RegExp(r'[0-9]')});
@@ -128,7 +126,7 @@ class ProfilePage extends StatelessWidget {
       isScrollControlled: true,
       backgroundColor: const Color(0xFF1A1A1A),
       shape: const RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(20))),
-      builder: (context) => StatefulBuilder( // Necessário para atualizar campos via API dentro do modal
+      builder: (context) => StatefulBuilder(
         builder: (context, setModalState) => Padding(
           padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom, left: 20, right: 20, top: 20),
           child: SingleChildScrollView(
@@ -142,14 +140,13 @@ class ProfilePage extends StatelessWidget {
                 _buildField(rgController, "RG", Icons.fingerprint), // Campo RG
                 _buildField(telController, "Telefone", Icons.phone, formatters: [telMask]),
 
-                // Campo CEP com busca automática
                 TextField(
                   controller: cepController,
                   inputFormatters: [cepMask],
                   keyboardType: TextInputType.number,
                   style: const TextStyle(color: Colors.white),
                   onChanged: (value) async {
-                    if (value.length == 9) { // CEP completo com a máscara
+                    if (value.length == 9) {
                       final info = await _buscarCEP(value);
                       if (info != null && info['erro'] == null) {
                         setModalState(() {
@@ -203,7 +200,7 @@ class ProfilePage extends StatelessWidget {
                         "estado": estadoController.text,
                         "cep": cepController.text,
                         "cpf": cpfController.text,
-                        "rg": rgController.text, // Salva o RG
+                        "rg": rgController.text,
                       });
                       Navigator.pop(context);
                     },
@@ -219,7 +216,6 @@ class ProfilePage extends StatelessWidget {
     );
   }
 
-  // --- AUXILIARES ---
   Widget _buildField(TextEditingController controller, String label, IconData icon, {List<TextInputFormatter>? formatters}) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
