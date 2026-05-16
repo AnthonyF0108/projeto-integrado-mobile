@@ -263,4 +263,4 @@ Os casos de uso descrevem como o usuário interage com o sistema AgroVale.
 
 **Relacionamento com MVP:** Autenticação de usuários
 
-![Casos de uso.png](../../../Desktop/PI/Casos%20de%20uso.png)
+<img width="1291" height="1415" alt="Casos de uso" src="https://github.com/user-attachments/assets/da326f29-6a0a-47e0-97aa-a31a93b57d13" />
