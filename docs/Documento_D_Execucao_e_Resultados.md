@@ -38,17 +38,8 @@ Arquitetura:
 ## 3. Estrutura dos Testes Executados
 
 ```
-test/
-  services/
-    auth_service_test.dart
-    firestore_service_test.dart
-    gemini_service_test.dart
-  cart/
-    cart_logic_test.dart
 integration_test/
   auth_flow_test.dart
-  cart_payment_flow_test.dart
-  ai_assistant_flow_test.dart
 ```
 
 ---
