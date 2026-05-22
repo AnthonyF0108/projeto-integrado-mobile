@@ -15,7 +15,6 @@ class GeminiService {
   final GenerativeModel _model;
   final FirebaseFirestore _firestore;
   final List<Content> _historico = [];
-
   List<Map<String, dynamic>> _catalogoCache = [];
 
   GeminiService()
@@ -56,14 +55,14 @@ class GeminiService {
       final buffer = StringBuffer();
       for (final p in _catalogoCache) {
         buffer.writeln(
-          '- ${p['nome']} | Preço: R\$ ${(p['preco'] as double).toStringAsFixed(2)}'
-              '${(p['descricao'] as String).isNotEmpty ? ' | Descrição: ${p['descricao']}' : ''}',
+          '- ${p['nome']} | Preco: R\$ ${(p['preco'] as double).toStringAsFixed(2)}'
+              '${(p['descricao'] as String).isNotEmpty ? ' | Descricao: ${p['descricao']}' : ''}',
         );
       }
       return buffer.toString();
     } catch (e) {
       print('Erro ao buscar produtos: $e');
-      return 'Não foi possível carregar o catálogo no momento.';
+      return 'Nao foi possivel carregar o catalogo no momento.';
     }
   }
 
@@ -83,20 +82,20 @@ class GeminiService {
       final catalogo = await _buscarCatalogoProdutos();
 
       final promptSistema = '''
-Você é um assistente virtual especialista em vendas da loja AgroVale.
-Seu objetivo é entender a necessidade do cliente e recomendar o(s) produto(s) mais adequado(s).
+Voce e um assistente virtual especialista em vendas da loja AgroVale.
+Seu objetivo e entender a necessidade do cliente e recomendar o(s) produto(s) mais adequado(s).
 
-CATÁLOGO ATUAL:
+CATALOGO ATUAL:
 $catalogo
 
-INSTRUÇÕES:
-- Recomende no máximo 3-4 produtos que melhor resolvam o problema.
-- Sempre cite o nome exato do produto como está no catálogo.
-- Explique brevemente por que cada produto é indicado.
-- Use linguagem amigável, sem jargões técnicos.
-- Se o cliente perguntar sobre preço, informe o valor do catálogo.
-- Nunca invente produtos que não estejam no catálogo.
-- Responda sempre em português do Brasil.
+INSTRUCOES:
+- Recomende no maximo 2-3 produtos que melhor resolvam o problema.
+- Sempre cite o nome exato do produto como esta no catalogo.
+- Explique brevemente por que cada produto e indicado.
+- Use linguagem amigavel, sem jargoes tecnicos.
+- Se o cliente perguntar sobre preco, informe o valor do catalogo.
+- Nunca invente produtos que nao estejam no catalogo.
+- Responda sempre em portugues do Brasil.
 
 MENSAGEM DO CLIENTE:
 $mensagemCliente
@@ -106,6 +105,21 @@ $mensagemCliente
       final response = await _model.generateContent(_historico);
       final textoResposta = response.text;
 
+      // ── CAPTURA DE TOKENS (para atividade do Prof. Rodrigo) ──────────────
+      final tokEntrada = response.usageMetadata?.promptTokenCount ?? 0;
+      final tokSaida = response.usageMetadata?.candidatesTokenCount ?? 0;
+      final tokTotal = response.usageMetadata?.totalTokenCount ?? 0;
+
+      print('╔══════════════════════════════════════╗');
+      print('║  CONSUMO DE TOKENS — GEMINI           ║');
+      print('╠══════════════════════════════════════╣');
+      print('║  Prompt: "$mensagemCliente"');
+      print('║  Tokens entrada : $tokEntrada');
+      print('║  Tokens saida   : $tokSaida');
+      print('║  Tokens TOTAL   : $tokTotal');
+      print('╚══════════════════════════════════════╝');
+      // ─────────────────────────────────────────────────────────────────────
+
       if (textoResposta != null && textoResposta.isNotEmpty) {
         _historico.add(Content.model([TextPart(textoResposta)]));
         final produtos = _extrairProdutosRecomendados(textoResposta);
@@ -113,7 +127,7 @@ $mensagemCliente
       }
 
       return RespostaIA(
-        texto: 'Desculpe, não consegui processar sua mensagem. Tente novamente.',
+        texto: 'Desculpe, nao consegui processar sua mensagem. Tente novamente.',
         produtos: [],
       );
     } catch (e) {
